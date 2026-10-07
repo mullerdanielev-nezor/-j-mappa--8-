@@ -1,5 +1,5 @@
 /* Minden oldalon közös elemek: lábléc */
-.lablec{background:#0b0b12;color:#b9bccb;padding:clamp(48px,6vw,72px) 20px 0;font-family:'Manrope',system-ui,sans-serif;font-size:15px;line-height:1.6}
+.lablec{background:#0b0b12;color:#b9bccb;padding:clamp(48px,6vw,72px) 20px 0;font-family:'Manrope',system-ui,sans-serif;font-size:16px;line-height:1.6}
 .lablec a{color:#e3e4ea;text-decoration:none}
 .lablec a:hover{color:#ffffff;text-decoration:underline;text-underline-offset:3px}
 .lablec a:focus-visible,.lablec button:focus-visible{outline:3px solid #a98bff;outline-offset:2px;border-radius:4px}
@@ -17,13 +17,11 @@
 .lablec-kapcsolat li{display:flex}
 .lablec-kapcsolat svg{flex:none;color:#a98bff}
 .lablec-kapcsolat .cim{display:flex;gap:10px;align-items:flex-start;padding:9px 0;color:#e3e4ea}
-.lablec-also{max-width:1200px;margin:clamp(40px,5vw,56px) auto 0;padding:22px 0 28px;border-top:1px solid rgba(255,255,255,.12);display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;align-items:center;font-size:13px;color:#8a8d9b}
+.lablec-also{max-width:1200px;margin:clamp(40px,5vw,56px) auto 0;padding:22px 0 28px;border-top:1px solid rgba(255,255,255,.12);display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;align-items:center;font-size:14px;color:#8a8d9b}
 .lablec-also a{color:#b9bccb}
 @media (max-width:960px){.lablec-racs{grid-template-columns:1fr 1fr}}
 @media (max-width:560px){.lablec-racs{grid-template-columns:1fr}}
 
-/* ===== Címek: vékony lila aláhúzás ===== */
-section h1,section h2,section h3,main h1,main h2,main h3,.lablec h3{text-decoration-line:underline;text-decoration-color:#6a2bff;text-decoration-thickness:2px;text-underline-offset:.24em}
 
 /* ===== Középre igazítás – főoldal (gépen és telefonon is) ===== */
 section{text-align:center}
