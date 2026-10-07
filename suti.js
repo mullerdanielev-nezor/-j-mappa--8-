@@ -4,7 +4,7 @@
 // BEÁLLÍTÁS: írd be az azonosítókat. Üresen hagyva az adott eszköz nem töltődik be.
 var SUTI_BEALLITAS = {
   GA4_AZONOSITO: '',        // pl. 'G-XXXXXXXXXX'
-  META_PIXEL_AZONOSITO: '', // pl. '123456789012345'
+  META_PIXEL_AZONOSITO: '1500364028565532',
   VERZIO: 1,                // ha új sütit/eszközt vezetsz be, növeld: mindenkitől újra kérünk hozzájárulást
   LEJARAT_NAP: 180          // ennyi nap után újra megkérdezzük a látogatót
 };
