@@ -21,3 +21,57 @@
 .lablec-also a{color:#b9bccb}
 @media (max-width:960px){.lablec-racs{grid-template-columns:1fr 1fr}}
 @media (max-width:560px){.lablec-racs{grid-template-columns:1fr}}
+
+/* ===== Címek: vékony lila aláhúzás ===== */
+section h1,section h2,section h3,main h1,main h2,main h3,.lablec h3{text-decoration-line:underline;text-decoration-color:#6a2bff;text-decoration-thickness:2px;text-underline-offset:.24em}
+
+/* ===== Középre igazítás – főoldal (gépen és telefonon is) ===== */
+section{text-align:center}
+section h1,section h2,section h3,section p{margin-left:auto !important;margin-right:auto !important}
+section [style*="max-width: 720px"],section [style*="max-width: 560px"],section [style*="max-width: 820px"]{margin-left:auto !important;margin-right:auto !important}
+section div[style*="display: flex"],section ul[style*="display: flex"],section ol[style*="display: flex"],section li[style*="display: flex"],section span[style*="display: flex"],section summary{justify-content:center !important}
+section div[style*="flex-direction: column"]:not(form div),section li[style*="flex-direction: column"]{align-items:center !important}
+section div[style*="flex-direction: column"] > *{max-width:100%}
+section input,section select,section textarea{text-align:left}
+section summary{gap:14px !important;text-align:center}
+.gal-fulek{justify-content:center !important}
+.gal-panel,.gal-fulek{width:100%}
+.gal-also{justify-content:center !important;text-align:center}
+.gal-also p{margin-left:auto !important;margin-right:auto !important}
+
+/* ===== Középre igazítás – lábléc ===== */
+.lablec-racs{text-align:center}
+.lablec-ceg{align-items:center}
+.lablec-ceg p{margin-left:auto;margin-right:auto}
+.lablec ul{align-items:center}
+.lablec-kapcsolat li{justify-content:center}
+.lablec-also{justify-content:center;text-align:center}
+
+/* ===== Aloldalak: címek középen; rövid oldalak (köszönjük, 404) teljesen középen ===== */
+main h1,main h2{text-align:center}
+main.kozep{text-align:center}
+main.kozep [aria-hidden="true"][style*="border-radius: 50%"]{margin-left:auto;margin-right:auto}
+main.kozep ol{align-items:center}
+main.kozep ol li{justify-content:center;text-align:left}
+main.kozep div[style*="display: flex"]{justify-content:center}
+
+/* ===== Telefonos optimalizálás ===== */
+html,body{overflow-x:clip}
+a,button,summary{-webkit-tap-highlight-color:rgba(106,43,255,.15)}
+@media (max-width:760px){
+  header>div{flex-wrap:nowrap !important;gap:10px !important}
+  header>div>div{flex-wrap:nowrap !important;gap:8px !important}
+  header img{height:30px !important}
+  header a[href^="tel:"]{font-size:0 !important;width:44px;justify-content:center;border:1.5px solid #d3d5de;border-radius:10px}
+  header a[href^="tel:"] svg{width:20px;height:20px}
+  header a[href="#ajanlat"]{padding:0 14px !important;font-size:14px !important;white-space:nowrap}
+  section{padding-left:16px !important;padding-right:16px !important}
+  section#top{padding-top:28px !important}
+  section summary{font-size:18px !important}
+  #ajanlat{padding:22px 18px !important}
+  .lablec{padding-left:16px;padding-right:16px}
+}
+@media (max-width:380px){
+  header a[href="#ajanlat"]{padding:0 10px !important;font-size:13px !important}
+}
+section details{width:100%;text-align:center}
