@@ -111,15 +111,14 @@ var SUTI_BEALLITAS = {
       }
     });
 
-    // Konverzió: a köszönjük oldalon, csak ha tényleg az űrlapról érkezett (és csak egyszer).
+    // "Érdeklődő" (Lead) konverzió a köszönjük oldalon. Frissítésre nem számol újra.
     if (document.body.getAttribute('data-konverzio') === 'ajanlatkeres') {
-      var elkuldve = false;
-      try { elkuldve = sessionStorage.getItem('uv4you-ajanlat-elkuldve') === '1'; } catch (e) {}
-      if (elkuldve && (d.s || d.m)) {
-        if (d.s && B.GA4_AZONOSITO) gtag('event', 'generate_lead');
-        if (d.m && B.META_PIXEL_AZONOSITO) fbq('track', 'Lead');
-        try { sessionStorage.removeItem('uv4you-ajanlat-elkuldve'); } catch (e) {}
-      }
+      var mar = false;
+      try { mar = sessionStorage.getItem('uv4you-lead-elkuldve') === '1'; } catch (e) {}
+      var elment = false;
+      if (!mar && d.s && B.GA4_AZONOSITO) { gtag('event', 'generate_lead'); elment = true; }
+      if (!mar && d.m && B.META_PIXEL_AZONOSITO) { fbq('track', 'Lead'); elment = true; }
+      if (elment) { try { sessionStorage.setItem('uv4you-lead-elkuldve', '1'); } catch (e) {} }
     }
   }
 

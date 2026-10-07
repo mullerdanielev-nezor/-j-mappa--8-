@@ -564,7 +564,8 @@ Közvetlen UV nyomtatás
     gomb.disabled = true;
     gomb.textContent = 'Küldés…';
     gomb.style.opacity = '0.75';
-    try { sessionStorage.setItem('uv4you-ajanlat-elkuldve', '1'); } catch (err) {}
+    // Új ajánlatkérés: a köszönjük oldalon újra számoljon "Érdeklődő" eseményt.
+    try { sessionStorage.removeItem('uv4you-lead-elkuldve'); } catch (err) {}
     // Ha az űrlapszolgáltató lassan vagy egyáltalán nem válaszol, adjunk más elérhetőséget.
     lassuIdozito = setTimeout(function () { lassu.hidden = false; }, 15000);
   });
