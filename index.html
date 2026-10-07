@@ -147,23 +147,27 @@ Közvetlen UV nyomtatás
 <img src="kepek/hero.webp" alt="Élénk színminták legyezőben" width="1600" height="974" fetchpriority="high" style="display: block; width: 100%; height: clamp(180px, 24vw, 300px); object-fit: cover; border-radius: 14px; background: #f3f4f7">
 </div>
 
-<form id="ajanlat" action="/api/ajanlat" method="post" enctype="multipart/form-data" style="flex: 1 1 380px; min-width: 0; background: #ffffff; color: #0b0b12; border: 1.5px solid #d3d5de; box-shadow: 0 16px 48px rgba(11,11,18,0.10); border-radius: 16px; padding: clamp(22px, 3vw, 34px); display: flex; flex-direction: column; gap: 16px; scroll-margin-top: 96px">
+<form id="ajanlat" action="https://formsubmit.co/mullerdanielev@gmail.com" method="POST" enctype="multipart/form-data" style="flex: 1 1 380px; min-width: 0; background: #ffffff; color: #0b0b12; border: 1.5px solid #d3d5de; box-shadow: 0 16px 48px rgba(11,11,18,0.10); border-radius: 16px; padding: clamp(22px, 3vw, 34px); display: flex; flex-direction: column; gap: 16px; scroll-margin-top: 96px">
+<input type="hidden" name="_subject" value="Új árajánlatkérés – UV4YOU">
+<input type="hidden" name="_next" value="https://www.uv4you.hu/koszonjuk.html">
+<input type="hidden" name="_template" value="table">
+<input type="hidden" name="_captcha" value="false">
 <div>
 <h2 style="margin: 0 0 6px; font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 26px; letter-spacing: -0.02em; line-height: 1.15">Kérj árajánlatot</h2>
 <p style="margin: 0; font-size: 15px; color: #4a4d5a">Írd le röviden, mire és mit nyomtatnál – hamarosan jelentkezünk.</p>
 </div>
 <div style="display: flex; flex-direction: column; gap: 6px">
 <label for="f-nev" style="font-size: 14px; font-weight: 700">Név</label>
-<input id="f-nev" name="nev" type="text" autocomplete="name" required style="font: inherit; font-size: 16px; padding: 0 14px; height: 48px; border: 1.5px solid #8a8d9b; border-radius: 8px; box-sizing: border-box; width: 100%">
+<input id="f-nev" name="Név" type="text" autocomplete="name" required style="font: inherit; font-size: 16px; padding: 0 14px; height: 48px; border: 1.5px solid #8a8d9b; border-radius: 8px; box-sizing: border-box; width: 100%">
 </div>
 <div style="display: flex; flex-direction: column; gap: 6px">
 <label for="f-ceg" style="font-size: 14px; font-weight: 700">Cégnév <span style="font-weight: 500; color: #4a4d5a">(nem kötelező)</span></label>
-<input id="f-ceg" name="cegnev" type="text" autocomplete="organization" style="font: inherit; font-size: 16px; padding: 0 14px; height: 48px; border: 1.5px solid #8a8d9b; border-radius: 8px; box-sizing: border-box; width: 100%">
+<input id="f-ceg" name="Cégnév" type="text" autocomplete="organization" style="font: inherit; font-size: 16px; padding: 0 14px; height: 48px; border: 1.5px solid #8a8d9b; border-radius: 8px; box-sizing: border-box; width: 100%">
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 16px">
 <div style="flex: 1 1 150px; display: flex; flex-direction: column; gap: 6px">
 <label for="f-tel" style="font-size: 14px; font-weight: 700">Telefonszám</label>
-<input id="f-tel" name="telefon" type="tel" autocomplete="tel" required style="font: inherit; font-size: 16px; padding: 0 14px; height: 48px; border: 1.5px solid #8a8d9b; border-radius: 8px; box-sizing: border-box; width: 100%">
+<input id="f-tel" name="Telefonszám" type="tel" autocomplete="tel" required style="font: inherit; font-size: 16px; padding: 0 14px; height: 48px; border: 1.5px solid #8a8d9b; border-radius: 8px; box-sizing: border-box; width: 100%">
 </div>
 <div style="flex: 1 1 150px; display: flex; flex-direction: column; gap: 6px">
 <label for="f-email" style="font-size: 14px; font-weight: 700">E-mail</label>
@@ -173,7 +177,7 @@ Közvetlen UV nyomtatás
 <div style="display: flex; flex-wrap: wrap; gap: 16px">
 <div style="flex: 2 1 170px; display: flex; flex-direction: column; gap: 6px">
 <label for="f-felulet" style="font-size: 14px; font-weight: 700">Milyen felületre?</label>
-<select id="f-felulet" name="felulet" style="font: inherit; font-size: 16px; padding: 0 10px; height: 48px; border: 1.5px solid #8a8d9b; border-radius: 8px; box-sizing: border-box; width: 100%; background: #ffffff">
+<select id="f-felulet" name="Felület" style="font: inherit; font-size: 16px; padding: 0 10px; height: 48px; border: 1.5px solid #8a8d9b; border-radius: 8px; box-sizing: border-box; width: 100%; background: #ffffff">
 <option>Plexi</option>
 <option>Fa</option>
 <option>Fém</option>
@@ -185,22 +189,22 @@ Közvetlen UV nyomtatás
 </div>
 <div style="flex: 1 1 100px; display: flex; flex-direction: column; gap: 6px">
 <label for="f-db" style="font-size: 14px; font-weight: 700">Darabszám</label>
-<input id="f-db" name="darab" type="number" min="1" inputmode="numeric" style="font: inherit; font-size: 16px; padding: 0 14px; height: 48px; border: 1.5px solid #8a8d9b; border-radius: 8px; box-sizing: border-box; width: 100%">
+<input id="f-db" name="Darabszám" type="number" min="1" inputmode="numeric" style="font: inherit; font-size: 16px; padding: 0 14px; height: 48px; border: 1.5px solid #8a8d9b; border-radius: 8px; box-sizing: border-box; width: 100%">
 </div>
 </div>
 <div style="display: flex; flex-direction: column; gap: 6px">
 <label for="f-leiras" style="font-size: 14px; font-weight: 700">Mit szeretnél nyomtatni?</label>
-<textarea id="f-leiras" name="leiras" rows="3" placeholder="Pl. 30×20 cm-es plexi cégtábla logóval" style="font: inherit; font-size: 16px; padding: 12px 14px; border: 1.5px solid #8a8d9b; border-radius: 8px; box-sizing: border-box; width: 100%; resize: vertical"></textarea>
+<textarea id="f-leiras" name="Leírás" rows="3" placeholder="Pl. 30×20 cm-es plexi cégtábla logóval" style="font: inherit; font-size: 16px; padding: 12px 14px; border: 1.5px solid #8a8d9b; border-radius: 8px; box-sizing: border-box; width: 100%; resize: vertical"></textarea>
 </div>
 <div style="display: flex; flex-direction: column; gap: 6px">
-<label for="f-fajl" style="font-size: 14px; font-weight: 700">Grafika vagy fotó <span style="font-weight: 500; color: #4a4d5a">(nem kötelező, max. 4 MB)</span></label>
-<input id="f-fajl" name="fajl" type="file" accept=".jpg,.jpeg,.png,.pdf,.svg,.ai,.eps" style="font: inherit; font-size: 15px; min-height: 44px">
+<label for="f-fajl" style="font-size: 14px; font-weight: 700">Grafika vagy fotó <span style="font-weight: 500; color: #4a4d5a">(nem kötelező, max. 10 MB)</span></label>
+<input id="f-fajl" name="attachment" type="file" accept=".jpg,.jpeg,.png,.pdf,.svg,.ai,.eps" style="font: inherit; font-size: 15px; min-height: 44px">
 </div>
 <div style="display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: #4a4d5a">
-<input id="f-gdpr" name="gdpr" type="checkbox" required style="width: 20px; height: 20px; margin: 2px 0 0; flex: none">
+<input id="f-gdpr" name="Adatkezelési tájékoztató" value="elolvasta" type="checkbox" required style="width: 20px; height: 20px; margin: 2px 0 0; flex: none">
 <label for="f-gdpr">Elolvastam az <a href="adatkezeles.html">adatkezelési tájékoztatót</a>.</label>
 </div>
-<div aria-hidden="true" style="position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden"><label for="f-web">Ezt a mezőt hagyd üresen</label><input id="f-web" name="weboldal" type="text" tabindex="-1" autocomplete="off"></div>
+<div aria-hidden="true" style="position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden"><label for="f-web">Ezt a mezőt hagyd üresen</label><input id="f-web" name="_honey" type="text" tabindex="-1" autocomplete="off"></div>
 <button type="submit" style="font: inherit; font-weight: 800; font-size: 18px; background: #6a2bff; color: #ffffff; border: 0; border-radius: 10px; min-height: 56px; cursor: pointer">Árajánlatot kérek</button>
 <p style="margin: 0; font-size: 14px; color: #4a4d5a; text-align: center">Az ajánlatkérés nem jár kötelezettséggel.</p>
 </form>
@@ -543,11 +547,11 @@ Közvetlen UV nyomtatás
   var fajl = document.getElementById('f-fajl');
   var gomb = urlap.querySelector('button[type="submit"]');
   var eredetiSzoveg = gomb.textContent;
-  var MAX = 4 * 1024 * 1024;
+  var MAX = 10 * 1024 * 1024;
 
   fajl.addEventListener('change', function () {
     var f = fajl.files[0];
-    fajl.setCustomValidity(f && f.size > MAX ? 'A fájl legfeljebb 4 MB lehet. Nagyobb fájlt később e-mailben is elküldhetsz.' : '');
+    fajl.setCustomValidity(f && f.size > MAX ? 'A fájl legfeljebb 10 MB lehet. Nagyobb fájlt később e-mailben is elküldhetsz.' : '');
     fajl.reportValidity();
   });
 
