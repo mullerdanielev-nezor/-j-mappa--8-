@@ -110,6 +110,17 @@ var SUTI_BEALLITAS = {
         el.parentNode.replaceChild(uj, el);
       }
     });
+
+    // Konverzió: a köszönjük oldalon, csak ha tényleg az űrlapról érkezett (és csak egyszer).
+    if (document.body.getAttribute('data-konverzio') === 'ajanlatkeres') {
+      var elkuldve = false;
+      try { elkuldve = sessionStorage.getItem('uv4you-ajanlat-elkuldve') === '1'; } catch (e) {}
+      if (elkuldve && (d.s || d.m)) {
+        if (d.s && B.GA4_AZONOSITO) gtag('event', 'generate_lead');
+        if (d.m && B.META_PIXEL_AZONOSITO) fbq('track', 'Lead');
+        try { sessionStorage.removeItem('uv4you-ajanlat-elkuldve'); } catch (e) {}
+      }
+    }
   }
 
   function mentes(statisztika, marketing) {
@@ -125,13 +136,13 @@ var SUTI_BEALLITAS = {
     alkalmaz(d);
   }
 
-  // --- Felület: sáv ("Elfogadom" / "Beállítások") és beállítási ablak ---
+  // --- Felület: sáv ("Elfogadom" / "Elutasítom" / "Beállítások") és beállítási ablak ---
   var STILUS = '' +
     '#suti-sav{position:fixed;left:16px;right:16px;bottom:16px;z-index:90;max-width:720px;margin:0 auto;background:#fff;color:#0b0b12;border:1.5px solid #d3d5de;border-radius:16px;box-shadow:0 16px 48px rgba(11,11,18,.18);padding:20px 22px;font-family:Manrope,system-ui,sans-serif;font-size:15px;line-height:1.55;box-sizing:border-box}' +
     '#suti-sav h2,#suti-ablak h2{margin:0 0 6px;font-family:Archivo,sans-serif;font-weight:800;font-size:20px;letter-spacing:-.01em}' +
     '#suti-sav p{margin:0 0 16px;color:#33354a}' +
     '.suti-gombok{display:flex;flex-wrap:wrap;gap:10px}' +
-    '.suti-gomb{font:inherit;font-weight:800;font-size:16px;min-height:48px;padding:0 20px;border-radius:9px;cursor:pointer;flex:1 1 170px;border:2px solid #6a2bff;background:#6a2bff;color:#fff}' +
+    '.suti-gomb{font:inherit;font-weight:800;font-size:16px;min-height:48px;padding:0 20px;border-radius:9px;cursor:pointer;flex:1 1 150px;border:2px solid #6a2bff;background:#6a2bff;color:#fff}' +
     '.suti-gomb.masodlagos{background:#fff;color:#4a1fd6}' +
     '.suti-gomb:focus-visible,.suti-kapcsolo input:focus-visible+span{outline:3px solid #0b0b12;outline-offset:2px}' +
     '#suti-hatter{position:fixed;inset:0;z-index:95;background:rgba(11,11,18,.55);display:flex;align-items:center;justify-content:center;padding:16px}' +
@@ -168,14 +179,16 @@ var SUTI_BEALLITAS = {
     sav.setAttribute('aria-label', 'Sütik');
     sav.innerHTML =
       '<h2>Sütiket használunk</h2>' +
-      '<p>A weboldal működéséhez szükséges sütik mindig aktívak. Ha elfogadod, statisztikai sütikkel (Google Analytics) mérjük a látogatottságot, marketing sütikkel (Meta Pixel) pedig a hirdetéseink eredményességét. A Beállításokban kategóriánként választhatsz, vagy mindet elutasíthatod. <a href="' + SUTIK_URL + '" style="color:#4a1fd6;font-weight:700">Részletek a sütikről</a></p>' +
+      '<p>A weboldal működéséhez szükséges sütik mindig aktívak. Ha elfogadod, statisztikai sütikkel (Google Analytics) mérjük a látogatottságot, marketing sütikkel (Meta Pixel) pedig a hirdetéseink eredményességét. A Beállításokban kategóriánként is választhatsz. <a href="' + SUTIK_URL + '" style="color:#4a1fd6;font-weight:700">Részletek a sütikről</a></p>' +
       '<div class="suti-gombok">' +
       '<button type="button" class="suti-gomb" data-suti="mind">Elfogadom</button>' +
+      '<button type="button" class="suti-gomb" data-suti="semmi">Elutasítom</button>' +
       '<button type="button" class="suti-gomb masodlagos" data-suti="beallitas">Beállítások</button>' +
       '</div>';
     sav.addEventListener('click', function (e) {
       var g = e.target.getAttribute && e.target.getAttribute('data-suti');
       if (g === 'mind') mentes(true, true);
+      else if (g === 'semmi') mentes(false, false);
       else if (g === 'beallitas') ablakMutat();
     });
     document.body.appendChild(sav);

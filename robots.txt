@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /api/
+Disallow: /koszonjuk.html
+
+Sitemap: https://www.uv4you.hu/sitemap.xml

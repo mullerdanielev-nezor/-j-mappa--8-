@@ -1,0 +1,21 @@
+{
+  "name": "UV4YOU – UV nyomtatás",
+  "short_name": "UV4YOU",
+  "lang": "hu",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#ffffff",
+  "theme_color": "#6a2bff",
+  "icons": [
+    {
+      "src": "/kepek/ikon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/kepek/ikon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
