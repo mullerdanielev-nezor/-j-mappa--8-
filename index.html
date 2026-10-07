@@ -36,9 +36,9 @@ summary::-webkit-details-marker{display:none}
 input:focus,select:focus,textarea:focus,a:focus-visible,summary:focus-visible{outline:3px solid #6a2bff;outline-offset:2px}
 @media (max-width:760px){.nav-links{display:none !important}}
 .gal-fulek{display:flex;flex-wrap:wrap;gap:10px}
-.gal-ful{font:inherit;font-family:'Archivo',sans-serif;font-weight:800;font-size:17px;min-height:48px;padding:0 22px;border-radius:999px;border:1.5px solid #d3d5de;background:#ffffff;color:#0b0b12;cursor:pointer;transition:background-color .2s,color .2s,border-color .2s}
+.gal-ful{text-decoration:none;display:inline-flex;align-items:center;font:inherit;font-family:'Archivo',sans-serif;font-weight:800;font-size:17px;min-height:48px;padding:0 22px;border-radius:999px;border:1.5px solid #d3d5de;background:#ffffff;color:#0b0b12;cursor:pointer;transition:background-color .2s,color .2s,border-color .2s}
 .gal-ful:hover{border-color:#0b0b12}
-.gal-ful[aria-selected="true"]{background:#0b0b12;border-color:#0b0b12;color:#ffffff}
+.gal-ful.aktiv{background:#0b0b12;border-color:#0b0b12;color:#ffffff}
 .gal-ful:focus-visible,.gal-kep:focus-visible,.gal-cta:focus-visible{outline:3px solid #6a2bff;outline-offset:3px}
 .gal-panel{display:flex;flex-direction:column;gap:20px;animation:gal-be .35s ease both}
 .gal-panel[hidden]{display:none}
@@ -59,7 +59,19 @@ input:focus,select:focus,textarea:focus,a:focus-visible,summary:focus-visible{ou
 .galeria[data-db="1"]{grid-template-columns:1fr;grid-template-rows:none;aspect-ratio:auto}
 .galeria .gal-kep{background:#ffffff;border:1.5px solid #e3e4ea}
 .galeria .gal-kep img{object-fit:contain}
-@media (max-width:760px){.galeria[data-db]{grid-template-columns:1fr 1fr;grid-template-rows:none;aspect-ratio:auto}.galeria[data-db] .gal-kep{aspect-ratio:1}.galeria[data-db]{grid-template-columns:1fr;gap:12px;max-width:420px}.galeria[data-db] .gal-kep:first-child{grid-column:auto}}
+@media (max-width:760px){.galeria[data-db]{grid-template-columns:1fr 1fr;grid-template-rows:none;aspect-ratio:auto}.galeria[data-db] .gal-kep{aspect-ratio:1}}
+.gal-fulek{position:sticky;top:72px;z-index:5;background:rgba(255,255,255,.94);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);padding:10px 0}
+.gal-panel{scroll-margin-top:150px;padding-top:28px;border-top:1px solid #e3e4ea}
+.gal-fulek+.gal-panel{border-top:0;padding-top:4px}
+.gal-cim{margin:0;font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(24px,2.6vw,32px);letter-spacing:-.02em}
+@media (max-width:760px){
+.gal-fulek{top:72px;gap:8px;flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start !important;padding:8px 2px;scrollbar-width:none}
+.gal-fulek::-webkit-scrollbar{display:none}
+.gal-ful{flex:none;min-height:42px;padding:0 18px;font-size:16px}
+.gal-panel{scroll-margin-top:130px}
+.galeria[data-db]{display:grid;grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:min(80vw,380px);gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;max-width:none;padding-bottom:6px;scrollbar-width:thin}
+.galeria[data-db] .gal-kep,.galeria[data-db] .gal-kep:first-child{scroll-snap-align:center;aspect-ratio:1;grid-column:auto;grid-row:auto}
+}
 @keyframes gal-be{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 @media (max-width:760px){.galeria{grid-template-columns:1fr 1fr;grid-template-rows:none;aspect-ratio:auto}.gal-kep{aspect-ratio:1}.gal-kep:first-child{grid-row:auto;grid-column:span 2;aspect-ratio:4/3}}
 #nagyito{position:fixed;inset:0;z-index:96;background:rgba(11,11,18,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:56px 16px 24px;gap:14px}
@@ -228,30 +240,35 @@ Közvetlen UV nyomtatás
 <h2 style="margin: 0 0 12px; font-family: 'Archivo', sans-serif; font-weight: 900; font-size: clamp(30px, 3.6vw, 48px); line-height: 1.08; letter-spacing: -0.025em">Közvetlenül a felületre nyomtatunk</h2>
 <p style="margin: 0; color: #4a4d5a; font-size: 18px">UV technológiával a nyomat közvetlenül az anyagra kerül – nincs matrica, nincs fólia. Válassz felületet, és nézd meg, mit lehet vele csinálni.</p>
 </div>
-<div role="tablist" aria-label="Felületek" class="gal-fulek">
-<button type="button" role="tab" id="ful-plexi" aria-controls="panel-plexi" aria-selected="true" class="gal-ful">Plexi</button>
-<button type="button" role="tab" id="ful-fa" aria-controls="panel-fa" aria-selected="false" tabindex="-1" class="gal-ful">Fa</button>
-<button type="button" role="tab" id="ful-fem" aria-controls="panel-fem" aria-selected="false" tabindex="-1" class="gal-ful">Fém</button>
-<button type="button" role="tab" id="ful-uveg" aria-controls="panel-uveg" aria-selected="false" tabindex="-1" class="gal-ful">Üveg</button>
-<button type="button" role="tab" id="ful-muanyag" aria-controls="panel-muanyag" aria-selected="false" tabindex="-1" class="gal-ful">Műanyag</button>
-</div>
-<div role="tabpanel" id="panel-plexi" aria-labelledby="ful-plexi" class="gal-panel">
+<nav aria-label="Ugrás felületre" class="gal-fulek">
+<a href="#felulet-plexi" class="gal-ful aktiv" data-cel="felulet-plexi">Plexi</a>
+<a href="#felulet-fa" class="gal-ful" data-cel="felulet-fa">Fa</a>
+<a href="#felulet-fem" class="gal-ful" data-cel="felulet-fem">Fém</a>
+<a href="#felulet-uveg" class="gal-ful" data-cel="felulet-uveg">Üveg</a>
+<a href="#felulet-muanyag" class="gal-ful" data-cel="felulet-muanyag">Műanyag</a>
+</nav>
+<div id="felulet-plexi" class="gal-panel">
+<h3 class="gal-cim">Plexi</h3>
 <div class="galeria" data-db="3"><button type="button" class="gal-kep" data-nagy="kepek/galeria/plexi-1.webp" aria-label="Átlátszó plexi tábla UV4YOU logóval – nagyítás"><img src="kepek/galeria/kicsi/plexi-1.webp" alt="Átlátszó plexi tábla UV4YOU logóval" width="720" height="720" loading="lazy" decoding="async"></button><button type="button" class="gal-kep" data-nagy="kepek/galeria/plexi-2.webp" aria-label="Csiszolt élű plexi kristálydíj UV4YOU logóval – nagyítás"><img src="kepek/galeria/kicsi/plexi-2.webp" alt="Csiszolt élű plexi kristálydíj UV4YOU logóval" width="720" height="720" loading="lazy" decoding="async"></button><button type="button" class="gal-kep" data-nagy="kepek/galeria/plexi-3.webp" aria-label="Ibolyaszínű plexi díjplakett UV4YOU logóval – nagyítás"><img src="kepek/galeria/kicsi/plexi-3.webp" alt="Ibolyaszínű plexi díjplakett UV4YOU logóval" width="720" height="720" loading="lazy" decoding="async"></button></div>
 <div class="gal-also"><p>Cégtáblák, díjak, asztali táblák és díszek – víztiszta vagy színes plexire, akár hátoldali nyomtatással.</p><a href="#ajanlat" class="gal-cta" data-felulet="Plexi">Ajánlatot kérek – plexi →</a></div>
 </div>
-<div role="tabpanel" id="panel-fa" aria-labelledby="ful-fa" class="gal-panel" hidden>
+<div id="felulet-fa" class="gal-panel">
+<h3 class="gal-cim">Fa</h3>
 <div class="galeria" data-db="3"><button type="button" class="gal-kep" data-nagy="kepek/galeria/fa-1.webp" aria-label="Fa tábla UV4YOU logóval – nagyítás"><img src="kepek/galeria/kicsi/fa-1.webp" alt="Fa tábla UV4YOU logóval" width="720" height="720" loading="lazy" decoding="async"></button><button type="button" class="gal-kep" data-nagy="kepek/galeria/fa-2.webp" aria-label="Fa asztali menütábla QR-kóddal – nagyítás"><img src="kepek/galeria/kicsi/fa-2.webp" alt="Fa asztali menütábla QR-kóddal" width="720" height="720" loading="lazy" decoding="async"></button><button type="button" class="gal-kep" data-nagy="kepek/galeria/fa-3.webp" aria-label="Fa díjplakett UV4YOU felirattal – nagyítás"><img src="kepek/galeria/kicsi/fa-3.webp" alt="Fa díjplakett UV4YOU felirattal" width="720" height="720" loading="lazy" decoding="async"></button></div>
 <div class="gal-also"><p>Fatáblák, menütáblák, díjak és ajándékok – a fa erezete átsejlik a nyomaton, ettől lesz igazán különleges.</p><a href="#ajanlat" class="gal-cta" data-felulet="Fa">Ajánlatot kérek – fa →</a></div>
 </div>
-<div role="tabpanel" id="panel-fem" aria-labelledby="ful-fem" class="gal-panel" hidden>
+<div id="felulet-fem" class="gal-panel">
+<h3 class="gal-cim">Fém</h3>
 <div class="galeria" data-db="3"><button type="button" class="gal-kep" data-nagy="kepek/galeria/fem-1.webp" aria-label="Szálcsiszolt fém cégtábla UV4YOU logóval – nagyítás"><img src="kepek/galeria/kicsi/fem-1.webp" alt="Szálcsiszolt fém cégtábla UV4YOU logóval" width="720" height="720" loading="lazy" decoding="async"></button><button type="button" class="gal-kep" data-nagy="kepek/galeria/fem-2.webp" aria-label="Fém doboz lila mintával és UV4YOU logóval – nagyítás"><img src="kepek/galeria/kicsi/fem-2.webp" alt="Fém doboz lila mintával és UV4YOU logóval" width="720" height="720" loading="lazy" decoding="async"></button><button type="button" class="gal-kep" data-nagy="kepek/galeria/fem-3.webp" aria-label="Fekete fém termosz lila grafikával – nagyítás"><img src="kepek/galeria/kicsi/fem-3.webp" alt="Fekete fém termosz lila grafikával" width="720" height="720" loading="lazy" decoding="async"></button></div>
 <div class="gal-also"><p>Fém cégtáblák, dobozok és kulacsok – tartós, karcálló és időjárásálló nyomat.</p><a href="#ajanlat" class="gal-cta" data-felulet="Fém">Ajánlatot kérek – fém →</a></div>
 </div>
-<div role="tabpanel" id="panel-uveg" aria-labelledby="ful-uveg" class="gal-panel" hidden>
+<div id="felulet-uveg" class="gal-panel">
+<h3 class="gal-cim">Üveg</h3>
 <div class="galeria" data-db="3"><button type="button" class="gal-kep" data-nagy="kepek/galeria/uveg-1.webp" aria-label="Fekete borosüveg UV4YOU nyomattal – nagyítás"><img src="kepek/galeria/kicsi/uveg-1.webp" alt="Fekete borosüveg UV4YOU nyomattal" width="720" height="720" loading="lazy" decoding="async"></button><button type="button" class="gal-kep" data-nagy="kepek/galeria/uveg-2.webp" aria-label="Levendulaszínű üveg parfümös flakon UV4YOU logóval – nagyítás"><img src="kepek/galeria/kicsi/uveg-2.webp" alt="Levendulaszínű üveg parfümös flakon UV4YOU logóval" width="720" height="720" loading="lazy" decoding="async"></button><button type="button" class="gal-kep" data-nagy="kepek/galeria/uveg-3.webp" aria-label="Üveg ékszerdoboz UV4YOU logóval – nagyítás"><img src="kepek/galeria/kicsi/uveg-3.webp" alt="Üveg ékszerdoboz UV4YOU logóval" width="720" height="720" loading="lazy" decoding="async"></button></div>
 <div class="gal-also"><p>Palackok, flakonok, dobozok és dísztárgyak – fehér aláfestéssel átlátszó felületen is élénk színek.</p><a href="#ajanlat" class="gal-cta" data-felulet="Üveg">Ajánlatot kérek – üveg →</a></div>
 </div>
-<div role="tabpanel" id="panel-muanyag" aria-labelledby="ful-muanyag" class="gal-panel" hidden>
+<div id="felulet-muanyag" class="gal-panel">
+<h3 class="gal-cim">Műanyag</h3>
 <div class="galeria" data-db="3"><button type="button" class="gal-kep" data-nagy="kepek/galeria/muanyag-1.webp" aria-label="Fekete telefontok lila grafikával és UV4YOU logóval – nagyítás"><img src="kepek/galeria/kicsi/muanyag-1.webp" alt="Fekete telefontok lila grafikával és UV4YOU logóval" width="720" height="720" loading="lazy" decoding="async"></button><button type="button" class="gal-kep" data-nagy="kepek/galeria/muanyag-2.webp" aria-label="Fekete műanyag doboz UV4YOU logóval – nagyítás"><img src="kepek/galeria/kicsi/muanyag-2.webp" alt="Fekete műanyag doboz UV4YOU logóval" width="720" height="720" loading="lazy" decoding="async"></button><button type="button" class="gal-kep" data-nagy="kepek/galeria/muanyag-3.webp" aria-label="Fehér-fekete toll UV4YOU felirattal – nagyítás"><img src="kepek/galeria/kicsi/muanyag-3.webp" alt="Fehér-fekete toll UV4YOU felirattal" width="720" height="720" loading="lazy" decoding="async"></button></div>
 <div class="gal-also"><p>Telefontokok, dobozok, tollak és promóciós termékek – egyedi grafikával, kis szériában is.</p><a href="#ajanlat" class="gal-cta" data-felulet="Műanyag">Ajánlatot kérek – műanyag →</a></div>
 </div>
@@ -448,39 +465,33 @@ Közvetlen UV nyomtatás
 <button type="button" class="nagyito-gomb" id="nagyito-kovetkezo" aria-label="Következő kép">›</button>
 </div>
 <script>
-// Felület-galéria: fülek, nagyító és "Ajánlatot kérek" a kiválasztott felülettel.
+// Felület-galéria: ugró gombsor, nagyító és "Ajánlatot kérek" a kiválasztott felülettel.
 (function () {
   var fulek = Array.prototype.slice.call(document.querySelectorAll('.gal-ful'));
 
-  function valt(ful, fokusz) {
+  // A gombsoron mindig az éppen látható felület legyen kiemelve
+  function kiemel(id) {
     fulek.forEach(function (f) {
-      var aktiv = f === ful;
-      f.setAttribute('aria-selected', aktiv ? 'true' : 'false');
-      f.tabIndex = aktiv ? 0 : -1;
-      document.getElementById(f.getAttribute('aria-controls')).hidden = !aktiv;
+      var aktiv = f.getAttribute('data-cel') === id;
+      f.classList.toggle('aktiv', aktiv);
+      if (aktiv) {
+        f.setAttribute('aria-current', 'true');
+        // mobilon a görgethető gombsorban is látszódjon
+        var sor = f.parentNode;
+        if (sor.scrollWidth > sor.clientWidth) sor.scrollTo({ left: f.offsetLeft - (sor.clientWidth - f.offsetWidth) / 2, behavior: 'smooth' });
+      } else {
+        f.removeAttribute('aria-current');
+      }
     });
-    if (fokusz) ful.focus();
   }
-
-  // A lábléc linkjei (#felulet-fa stb.) a megfelelő fülre visznek
-  function cimbol() {
-    var m = location.hash.match(/^#felulet-(\w+)$/);
-    var ful = m && document.getElementById('ful-' + m[1]);
-    if (!ful) return;
-    valt(ful);
-    document.getElementById('feluletek').scrollIntoView();
+  if ('IntersectionObserver' in window) {
+    var figyelo = new IntersectionObserver(function (bejegyzesek) {
+      bejegyzesek.forEach(function (b) { if (b.isIntersecting) kiemel(b.target.id); });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    document.querySelectorAll('.gal-panel').forEach(function (p) { figyelo.observe(p); });
   }
-  window.addEventListener('hashchange', cimbol);
-  window.addEventListener('load', function () { setTimeout(cimbol, 0); });
-
-  fulek.forEach(function (f, i) {
-    f.addEventListener('click', function () { valt(f); });
-    f.addEventListener('keydown', function (e) {
-      var j = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: fulek.length - 1 }[e.key];
-      if (j === undefined) return;
-      e.preventDefault();
-      valt(fulek[(j + fulek.length) % fulek.length], true);
-    });
+  fulek.forEach(function (f) {
+    f.addEventListener('click', function () { kiemel(f.getAttribute('data-cel')); });
   });
 
   // "Ajánlatot kérek" – előre kiválasztja a felületet az űrlapon

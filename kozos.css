@@ -74,3 +74,4 @@ a,button,summary{-webkit-tap-highlight-color:rgba(106,43,255,.15)}
 }
 section details{width:100%;text-align:center}
 .gal-also{flex-direction:column;max-width:840px;width:100%;margin-left:auto;margin-right:auto}
+.gal-also p{flex:none !important}
