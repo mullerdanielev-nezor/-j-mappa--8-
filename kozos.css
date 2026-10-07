@@ -1,0 +1,23 @@
+/* Minden oldalon közös elemek: lábléc */
+.lablec{background:#0b0b12;color:#b9bccb;padding:clamp(48px,6vw,72px) 20px 0;font-family:'Manrope',system-ui,sans-serif;font-size:15px;line-height:1.6}
+.lablec a{color:#e3e4ea;text-decoration:none}
+.lablec a:hover{color:#ffffff;text-decoration:underline;text-underline-offset:3px}
+.lablec a:focus-visible,.lablec button:focus-visible{outline:3px solid #a98bff;outline-offset:2px;border-radius:4px}
+.lablec-racs{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1.3fr 1.2fr;gap:40px 48px}
+.lablec-ceg{display:flex;flex-direction:column;align-items:flex-start;gap:18px}
+.lablec-ceg img{display:block;height:44px;width:auto}
+.lablec-ceg p{margin:0;max-width:320px}
+.lablec-cta{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 22px;border-radius:10px;background:#6a2bff;color:#ffffff !important;font-weight:800;font-size:16px}
+.lablec-cta:hover{background:#7d45ff;text-decoration:none !important}
+.lablec h3{margin:0 0 14px;font-family:'Archivo',sans-serif;font-weight:800;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#ffffff}
+.lablec ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.lablec li>a,.lablec li>button{min-height:40px;display:inline-flex;align-items:center;gap:10px}
+.lablec li>button{font:inherit;color:#e3e4ea;background:none;border:0;padding:0;cursor:pointer;text-align:left}
+.lablec li>button:hover{color:#ffffff;text-decoration:underline;text-underline-offset:3px}
+.lablec-kapcsolat li{display:flex}
+.lablec-kapcsolat svg{flex:none;color:#a98bff}
+.lablec-kapcsolat .cim{display:flex;gap:10px;align-items:flex-start;padding:9px 0;color:#e3e4ea}
+.lablec-also{max-width:1200px;margin:clamp(40px,5vw,56px) auto 0;padding:22px 0 28px;border-top:1px solid rgba(255,255,255,.12);display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;align-items:center;font-size:13px;color:#8a8d9b}
+.lablec-also a{color:#b9bccb}
+@media (max-width:960px){.lablec-racs{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.lablec-racs{grid-template-columns:1fr}}

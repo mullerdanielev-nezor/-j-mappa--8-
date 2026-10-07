@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<title>UV4YOU – UV nyomtatás szinte bármilyen felületre</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preload" href="kepek/logo.png" as="image">
+<script>document.documentElement.classList.add('preloader-aktiv')</script>
+<meta name="description" content="UV nyomtatás plexire, fára, fémre, üvegre, műanyagra. Cégtáblák, QR-táblák, reklámtárgyak, egyedi ajándékok, csomagolások. Kérj árajánlatot!">
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="kozos.css">
+<style>
+body{margin:0}
+html{scroll-behavior:smooth}
+a{color:#4a1fd6}a:hover{color:#2f0fa0}
+summary{cursor:pointer;list-style:none}
+summary::-webkit-details-marker{display:none}
+input:focus,select:focus,textarea:focus,a:focus-visible,summary:focus-visible{outline:3px solid #6a2bff;outline-offset:2px}
+@media (max-width:760px){.nav-links{display:none !important}}
+.gal-fulek{display:flex;flex-wrap:wrap;gap:10px}
+.gal-ful{font:inherit;font-family:'Archivo',sans-serif;font-weight:800;font-size:17px;min-height:48px;padding:0 22px;border-radius:999px;border:1.5px solid #d3d5de;background:#ffffff;color:#0b0b12;cursor:pointer;transition:background-color .2s,color .2s,border-color .2s}
+.gal-ful:hover{border-color:#0b0b12}
+.gal-ful[aria-selected="true"]{background:#0b0b12;border-color:#0b0b12;color:#ffffff}
+.gal-ful:focus-visible,.gal-kep:focus-visible,.gal-cta:focus-visible{outline:3px solid #6a2bff;outline-offset:3px}
+.gal-panel{display:flex;flex-direction:column;gap:20px;animation:gal-be .35s ease both}
+.gal-panel[hidden]{display:none}
+.galeria{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:repeat(2,minmax(0,1fr));gap:12px;aspect-ratio:2/1}
+.gal-kep{padding:0;border:0;border-radius:12px;overflow:hidden;background:#f3f4f7;cursor:zoom-in;min-height:0;display:block}
+.gal-kep:first-child{grid-row:span 2}
+.gal-kep img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+.gal-kep:hover img{transform:scale(1.04)}
+.gal-also{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center;justify-content:space-between}
+.gal-also p{margin:0;color:#33354a;font-size:17px;max-width:640px;flex:1 1 320px}
+.gal-cta{background:#6a2bff;color:#ffffff !important;text-decoration:none;font-weight:800;font-size:16px;padding:0 22px;min-height:48px;display:flex;align-items:center;border-radius:10px}
+.gal-cta:hover{background:#4a1fd6}
+@keyframes gal-be{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (max-width:760px){.galeria{grid-template-columns:1fr 1fr;grid-template-rows:none;aspect-ratio:auto}.gal-kep{aspect-ratio:1}.gal-kep:first-child{grid-row:auto;grid-column:span 2;aspect-ratio:4/3}}
+#nagyito{position:fixed;inset:0;z-index:96;background:rgba(11,11,18,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:56px 16px 24px;gap:14px}
+#nagyito[hidden]{display:none}
+#nagyito img{max-width:min(1200px,100%);max-height:calc(100vh - 150px);object-fit:contain;border-radius:8px}
+#nagyito p{margin:0;color:#e3e4ea;font-size:15px;text-align:center}
+.nagyito-gomb{position:absolute;width:48px;height:48px;border-radius:50%;border:0;background:rgba(255,255,255,.14);color:#ffffff;font-size:26px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.nagyito-gomb:hover{background:rgba(255,255,255,.28)}
+.nagyito-gomb:focus-visible{outline:3px solid #a98bff;outline-offset:2px}
+#nagyito-bezar{top:14px;right:14px}
+#nagyito-elozo{left:14px;top:50%;transform:translateY(-50%)}
+#nagyito-kovetkezo{right:14px;top:50%;transform:translateY(-50%)}
+@media (prefers-reduced-motion:reduce){.gal-panel{animation:none}.gal-kep img{transition:none}}
+.preloader-aktiv body{overflow:hidden}
+.preloader-aktiv #fejlec-logo{visibility:hidden}
+#preloader{display:none}
+.preloader-aktiv #preloader{position:fixed;inset:0;z-index:100;background:#ffffff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;transition:background-color .45s ease}
+#preloader-logo{width:min(72vw,440px);height:auto;transform-origin:0 0;animation:preloader-be .5s cubic-bezier(.2,.7,.2,1) both}
+#preloader-csik{width:min(40vw,180px);height:3px;border-radius:3px;background:#ece9f8;overflow:hidden;transition:opacity .2s}
+#preloader-csik::after{content:"";display:block;width:40%;height:100%;border-radius:3px;background:#6a2bff;animation:preloader-csik 0.9s ease-in-out infinite}
+#preloader.indul{background-color:rgba(255,255,255,0);pointer-events:none}
+#preloader.indul #preloader-csik{opacity:0}
+@keyframes preloader-be{from{opacity:0;transform:translateY(12px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes preloader-csik{0%{transform:translateX(-100%)}100%{transform:translateX(250%)}}
+@media (prefers-reduced-motion:reduce){#preloader-logo,#preloader-csik::after{animation:none}}
+</style>
+</head>
+<body>
+<div id="preloader" aria-hidden="true">
+<img id="preloader-logo" src="kepek/logo.png" alt="" width="640" height="186">
+<div id="preloader-csik"></div>
+</div>
+<div style="font-family: 'Manrope', system-ui, sans-serif; color: #0b0b12; background: #ffffff; font-size: 17px; line-height: 1.55">
+
+<header style="background: #ffffff; color: #0b0b12; padding: 14px 20px; position: sticky; top: 0; z-index: 10; border-bottom: 1px solid #e3e4ea">
+<div style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap">
+<a href="#top" aria-label="UV4YOU – az oldal teteje" style="min-height: 44px; display: flex; align-items: center"><img id="fejlec-logo" src="kepek/logo.png" alt="UV4YOU" width="124" height="36" style="display: block; height: 36px; width: auto"></a>
+<nav class="nav-links" aria-label="Fő navigáció" style="display: flex; gap: 28px; font-size: 15px; font-weight: 600">
+<a href="#feluletek" style="color: #33354a; text-decoration: none; min-height: 44px; display: flex; align-items: center">Felületek</a>
+<a href="#termekek" style="color: #33354a; text-decoration: none; min-height: 44px; display: flex; align-items: center">Mit nyomtatunk?</a>
+<a href="#gyik" style="color: #33354a; text-decoration: none; min-height: 44px; display: flex; align-items: center">GYIK</a>
+</nav>
+<div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap">
+<a href="tel:+36203639271" style="color: #0b0b12; text-decoration: none; font-weight: 700; font-size: 15px; min-height: 44px; display: flex; align-items: center; gap: 8px">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.8 2z"/></svg>
++36 20 363 9271</a>
+<a href="#ajanlat" style="background: #6a2bff; color: #ffffff; text-decoration: none; font-weight: 800; font-size: 15px; padding: 0 20px; min-height: 44px; display: flex; align-items: center; border-radius: 8px">Ajánlatot kérek</a>
+</div>
+</div>
+</header>
+
+<section id="top" style="background: #ffffff; color: #0b0b12; padding: clamp(40px, 6vw, 88px) 20px clamp(56px, 7vw, 104px)">
+<div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: clamp(32px, 5vw, 72px); align-items: flex-start">
+
+<div style="flex: 999 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #33354a">
+<span aria-hidden="true" style="display: flex; gap: 5px">
+<span style="width: 12px; height: 12px; border-radius: 50%; background: #00b7eb"></span>
+<span style="width: 12px; height: 12px; border-radius: 50%; background: #ec1c8c"></span>
+<span style="width: 12px; height: 12px; border-radius: 50%; background: #ffe14a"></span>
+<span style="width: 12px; height: 12px; border-radius: 50%; background: #0b0b12"></span>
+</span>
+Közvetlen UV nyomtatás
+</div>
+<h1 style="margin: 0; font-family: 'Archivo', sans-serif; font-weight: 900; font-size: clamp(38px, 5.6vw, 76px); line-height: 1.02; letter-spacing: -0.03em">UV nyomtatás szinte <span style="color: #6a2bff">bármilyen</span> felületre</h1>
+<p style="margin: 0; font-size: clamp(17px, 1.6vw, 21px); color: #33354a; max-width: 560px">Egyedi cégtáblára, reklámtárgyra vagy különleges terméknyomtatásra van szükséged? Küldd el az elképzelésed, és árajánlatot adunk rá.</p>
+
+<ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 12px 28px; font-weight: 600; font-size: 16px">
+<li style="display: flex; align-items: center; gap: 10px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6a2bff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Fehér nyomtatás</li>
+<li style="display: flex; align-items: center; gap: 10px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6a2bff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Élénk színek</li>
+<li style="display: flex; align-items: center; gap: 10px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6a2bff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>3D / lakk hatás</li>
+<li style="display: flex; align-items: center; gap: 10px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6a2bff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Kis és nagy széria</li>
+</ul>
+
+<div style="display: flex; flex-wrap: wrap; gap: 14px; align-items: center">
+<a href="#ajanlat" style="background: #6a2bff; color: #ffffff; text-decoration: none; font-weight: 800; font-size: 18px; padding: 0 28px; min-height: 56px; display: flex; align-items: center; gap: 10px; border-radius: 10px">Árajánlatot kérek
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+<a href="#feluletek" style="color: #0b0b12; text-decoration: none; font-weight: 700; font-size: 17px; padding: 0 24px; min-height: 56px; display: flex; align-items: center; border-radius: 10px; border: 2px solid #0b0b12">Galéria</a>
+</div>
+
+<img src="kepek/hero.jpg" alt="Élénk színminták legyezőben" width="1600" height="974" fetchpriority="high" style="display: block; width: 100%; height: clamp(180px, 24vw, 300px); object-fit: cover; border-radius: 14px; background: #f3f4f7">
+</div>
+
+<form id="ajanlat" action="ajanlat.php" method="post" enctype="multipart/form-data" style="flex: 1 1 380px; min-width: 0; background: #ffffff; color: #0b0b12; border: 1.5px solid #d3d5de; box-shadow: 0 16px 48px rgba(11,11,18,0.10); border-radius: 16px; padding: clamp(22px, 3vw, 34px); display: flex; flex-direction: column; gap: 16px; scroll-margin-top: 96px">
+<div>
+<h2 style="margin: 0 0 6px; font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 26px; letter-spacing: -0.02em; line-height: 1.15">Kérj árajánlatot</h2>
+<p style="margin: 0; font-size: 15px; color: #4a4d5a">Írd le röviden, mire és mit nyomtatnál. [VÁLASZIDŐ] belül válaszolunk.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="f-nev" style="font-size: 14px; font-weight: 700">Név</label>
+<input id="f-nev" name="nev" type="text" autocomplete="name" required style="font: inherit; font-size: 16px; padding: 0 14px; height: 48px; border: 1.5px solid #8a8d9b; border-radius: 8px; box-sizing: border-box; width: 100%">
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="f-ceg" style="font-size: 14px; font-weight: 700">Cégnév <span style="font-weight: 500; color: #4a4d5a">(nem kötelező)</span></label>
+<input id="f-ceg" name="cegnev" type="text" autocomplete="organization" style="font: inherit; font-size: 16px; padding: 0 14px; height: 48px; border: 1.5px solid #8a8d9b; border-radius: 8px; box-sizing: border-box; width: 100%">
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
+<div style="flex: 1 1 150px; display: flex; flex-direction: column; gap: 6px">
+<label for="f-tel" style="font-size: 14px; font-weight: 700">Telefonszám</label>
+<input id="f-tel" name="telefon" type="tel" autocomplete="tel" required style="font: inherit; font-size: 16px; padding: 0 14px; height: 48px; border: 1.5px solid #8a8d9b; border-radius: 8px; box-sizing: border-box; width: 100%">
+</div>
+<div style="flex: 1 1 150px; display: flex; flex-direction: column; gap: 6px">
+<label for="f-email" style="font-size: 14px; font-weight: 700">E-mail</label>
+<input id="f-email" name="email" type="email" autocomplete="email" required style="font: inherit; font-size: 16px; padding: 0 14px; height: 48px; border: 1.5px solid #8a8d9b; border-radius: 8px; box-sizing: border-box; width: 100%">
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
+<div style="flex: 2 1 170px; display: flex; flex-direction: column; gap: 6px">
+<label for="f-felulet" style="font-size: 14px; font-weight: 700">Milyen felületre?</label>
+<select id="f-felulet" name="felulet" style="font: inherit; font-size: 16px; padding: 0 10px; height: 48px; border: 1.5px solid #8a8d9b; border-radius: 8px; box-sizing: border-box; width: 100%; background: #ffffff">
+<option>Plexi</option>
+<option>Fa</option>
+<option>Fém</option>
+<option>Üveg</option>
+<option>Műanyag</option>
+<option>Doboz / csomagolás</option>
+<option>Egyéb / nem tudom</option>
+</select>
+</div>
+<div style="flex: 1 1 100px; display: flex; flex-direction: column; gap: 6px">
+<label for="f-db" style="font-size: 14px; font-weight: 700">Darabszám</label>
+<input id="f-db" name="darab" type="number" min="1" inputmode="numeric" style="font: inherit; font-size: 16px; padding: 0 14px; height: 48px; border: 1.5px solid #8a8d9b; border-radius: 8px; box-sizing: border-box; width: 100%">
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="f-leiras" style="font-size: 14px; font-weight: 700">Mit szeretnél nyomtatni?</label>
+<textarea id="f-leiras" name="leiras" rows="3" placeholder="Pl. 30×20 cm-es plexi cégtábla logóval" style="font: inherit; font-size: 16px; padding: 12px 14px; border: 1.5px solid #8a8d9b; border-radius: 8px; box-sizing: border-box; width: 100%; resize: vertical"></textarea>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="f-fajl" style="font-size: 14px; font-weight: 700">Grafika vagy fotó <span style="font-weight: 500; color: #4a4d5a">(nem kötelező)</span></label>
+<input id="f-fajl" name="fajl" type="file" accept=".jpg,.jpeg,.png,.pdf,.svg,.ai,.eps" style="font: inherit; font-size: 15px; min-height: 44px">
+</div>
+<div style="display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: #4a4d5a">
+<input id="f-gdpr" name="gdpr" type="checkbox" required style="width: 20px; height: 20px; margin: 2px 0 0; flex: none">
+<label for="f-gdpr">Elolvastam az <a href="adatkezeles.html">adatkezelési tájékoztatót</a>.</label>
+</div>
+<div aria-hidden="true" style="position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden"><label for="f-web">Ezt a mezőt hagyd üresen</label><input id="f-web" name="weboldal" type="text" tabindex="-1" autocomplete="off"></div>
+<button type="submit" style="font: inherit; font-weight: 800; font-size: 18px; background: #6a2bff; color: #ffffff; border: 0; border-radius: 10px; min-height: 56px; cursor: pointer">Árajánlatot kérek</button>
+<p style="margin: 0; font-size: 14px; color: #4a4d5a; text-align: center">Az ajánlatkérés nem jár kötelezettséggel.</p>
+</form>
+
+</div>
+</section>
+
+<section id="feluletek" style="border-top: 1px solid #e3e4ea; background: #ffffff; padding: clamp(56px, 8vw, 104px) 20px; scroll-margin-top: 72px">
+<div style="max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px">
+<div style="max-width: 720px">
+<h2 style="margin: 0 0 12px; font-family: 'Archivo', sans-serif; font-weight: 900; font-size: clamp(30px, 3.6vw, 48px); line-height: 1.08; letter-spacing: -0.025em">Közvetlenül a felületre nyomtatunk</h2>
+<p style="margin: 0; color: #4a4d5a; font-size: 18px">UV technológiával a nyomat közvetlenül az anyagra kerül – nincs matrica, nincs fólia. Válassz felületet, és nézd meg, mit lehet vele csinálni.</p>
+</div>
+<div role="tablist" aria-label="Felületek" class="gal-fulek">
+<button type="button" role="tab" id="ful-plexi" aria-controls="panel-plexi" aria-selected="true" class="gal-ful">Plexi</button>
+<button type="button" role="tab" id="ful-fa" aria-controls="panel-fa" aria-selected="false" tabindex="-1" class="gal-ful">Fa</button>
+<button type="button" role="tab" id="ful-fem" aria-controls="panel-fem" aria-selected="false" tabindex="-1" class="gal-ful">Fém</button>
+<button type="button" role="tab" id="ful-uveg" aria-controls="panel-uveg" aria-selected="false" tabindex="-1" class="gal-ful">Üveg</button>
+<button type="button" role="tab" id="ful-muanyag" aria-controls="panel-muanyag" aria-selected="false" tabindex="-1" class="gal-ful">Műanyag</button>
+</div>
+<div role="tabpanel" id="panel-plexi" aria-labelledby="ful-plexi" class="gal-panel">
+<div class="galeria"><button type="button" class="gal-kep" data-nagy="kepek/galeria/plexi-1.jpg" aria-label="Világító reklámtábla egy motel bejáratánál – nagyítás"><img src="kepek/galeria/kicsi/plexi-1.jpg" alt="Világító reklámtábla egy motel bejáratánál" loading="lazy" decoding="async"></button><button type="button" class="gal-kep" data-nagy="kepek/galeria/plexi-2.jpg" aria-label="Neon cégtábla egy bárban – nagyítás"><img src="kepek/galeria/kicsi/plexi-2.jpg" alt="Neon cégtábla egy bárban" loading="lazy" decoding="async"></button><button type="button" class="gal-kep" data-nagy="kepek/galeria/plexi-3.jpg" aria-label="Photobooth feliratú világító tábla – nagyítás"><img src="kepek/galeria/kicsi/plexi-3.jpg" alt="Photobooth feliratú világító tábla" loading="lazy" decoding="async"></button><button type="button" class="gal-kep" data-nagy="kepek/galeria/plexi-4.jpg" aria-label="Szív alakú világító dekoráció kirakatban – nagyítás"><img src="kepek/galeria/kicsi/plexi-4.jpg" alt="Szív alakú világító dekoráció kirakatban" loading="lazy" decoding="async"></button><button type="button" class="gal-kep" data-nagy="kepek/galeria/plexi-5.jpg" aria-label="Piros fénycsík sötét háttér előtt – nagyítás"><img src="kepek/galeria/kicsi/plexi-5.jpg" alt="Piros fénycsík sötét háttér előtt" loading="lazy" decoding="async"></button></div>
+<div class="gal-also"><p>Cégtáblák, világító reklámok, asztali táblák és díszek – víztiszta vagy színes plexire, akár hátoldali nyomtatással.</p><a href="#ajanlat" class="gal-cta" data-felulet="Plexi">Ajánlatot kérek – plexi →</a></div>
+</div>
+<div role="tabpanel" id="panel-fa" aria-labelledby="ful-fa" class="gal-panel" hidden>
+<div class="galeria"><button type="button" class="gal-kep" data-nagy="kepek/galeria/fa-1.jpg" aria-label="Mintás fa poháralátétek – nagyítás"><img src="kepek/galeria/kicsi/fa-1.jpg" alt="Mintás fa poháralátétek" loading="lazy" decoding="async"></button><button type="button" class="gal-kep" data-nagy="kepek/galeria/fa-2.jpg" aria-label="Színes feliratú fa deszkafal – nagyítás"><img src="kepek/galeria/kicsi/fa-2.jpg" alt="Színes feliratú fa deszkafal" loading="lazy" decoding="async"></button><button type="button" class="gal-kep" data-nagy="kepek/galeria/fa-3.jpg" aria-label="Sportbár tábla fa falon – nagyítás"><img src="kepek/galeria/kicsi/fa-3.jpg" alt="Sportbár tábla fa falon" loading="lazy" decoding="async"></button><button type="button" class="gal-kep" data-nagy="kepek/galeria/fa-4.jpg" aria-label="Címeres tábla fa falon – nagyítás"><img src="kepek/galeria/kicsi/fa-4.jpg" alt="Címeres tábla fa falon" loading="lazy" decoding="async"></button><button type="button" class="gal-kep" data-nagy="kepek/galeria/fa-5.jpg" aria-label="Fa betűkből álló felirat kirakatban – nagyítás"><img src="kepek/galeria/kicsi/fa-5.jpg" alt="Fa betűkből álló felirat kirakatban" loading="lazy" decoding="async"></button></div>
+<div class="gal-also"><p>Fatáblák, poháralátétek, dobozok és ajándékok – a fa erezete átsejlik a nyomaton, ettől lesz igazán különleges.</p><a href="#ajanlat" class="gal-cta" data-felulet="Fa">Ajánlatot kérek – fa →</a></div>
+</div>
+<div role="tabpanel" id="panel-fem" aria-labelledby="ful-fem" class="gal-panel" hidden>
+<div class="galeria"><button type="button" class="gal-kep" data-nagy="kepek/galeria/fem-1.jpg" aria-label="Fém cégtábla egy bár pultja fölött – nagyítás"><img src="kepek/galeria/kicsi/fem-1.jpg" alt="Fém cégtábla egy bár pultja fölött" loading="lazy" decoding="async"></button><button type="button" class="gal-kep" data-nagy="kepek/galeria/fem-2.jpg" aria-label="Nyomtatott tábla ajtón, logóhellyel – nagyítás"><img src="kepek/galeria/kicsi/fem-2.jpg" alt="Nyomtatott tábla ajtón, logóhellyel" loading="lazy" decoding="async"></button><button type="button" class="gal-kep" data-nagy="kepek/galeria/fem-3.jpg" aria-label="Fém bejárati felirat kék ég előtt – nagyítás"><img src="kepek/galeria/kicsi/fem-3.jpg" alt="Fém bejárati felirat kék ég előtt" loading="lazy" decoding="async"></button><button type="button" class="gal-kep" data-nagy="kepek/galeria/fem-4.jpg" aria-label="Feliratos fém ajtóbehúzó – nagyítás"><img src="kepek/galeria/kicsi/fem-4.jpg" alt="Feliratos fém ajtóbehúzó" loading="lazy" decoding="async"></button><button type="button" class="gal-kep" data-nagy="kepek/galeria/fem-5.jpg" aria-label="Szív alakú díszes cégér – nagyítás"><img src="kepek/galeria/kicsi/fem-5.jpg" alt="Szív alakú díszes cégér" loading="lazy" decoding="async"></button></div>
+<div class="gal-also"><p>Alumínium és fém táblák, névtáblák, ajtótáblák – tartós, karcálló és időjárásálló nyomat.</p><a href="#ajanlat" class="gal-cta" data-felulet="Fém">Ajánlatot kérek – fém →</a></div>
+</div>
+<div role="tabpanel" id="panel-uveg" aria-labelledby="ful-uveg" class="gal-panel" hidden>
+<div class="galeria"><button type="button" class="gal-kep" data-nagy="kepek/galeria/uveg-1.jpg" aria-label="Piros üveg parfümös flakon – nagyítás"><img src="kepek/galeria/kicsi/uveg-1.jpg" alt="Piros üveg parfümös flakon" loading="lazy" decoding="async"></button><button type="button" class="gal-kep" data-nagy="kepek/galeria/uveg-2.jpg" aria-label="Borosüveg címkével és pohárral – nagyítás"><img src="kepek/galeria/kicsi/uveg-2.jpg" alt="Borosüveg címkével és pohárral" loading="lazy" decoding="async"></button><button type="button" class="gal-kep" data-nagy="kepek/galeria/uveg-3.jpg" aria-label="Feliratos üdítős üveg – nagyítás"><img src="kepek/galeria/kicsi/uveg-3.jpg" alt="Feliratos üdítős üveg" loading="lazy" decoding="async"></button><button type="button" class="gal-kep" data-nagy="kepek/galeria/uveg-4.jpg" aria-label="Címkés patikaüvegek – nagyítás"><img src="kepek/galeria/kicsi/uveg-4.jpg" alt="Címkés patikaüvegek" loading="lazy" decoding="async"></button><button type="button" class="gal-kep" data-nagy="kepek/galeria/uveg-5.jpg" aria-label="Pezsgősüveg nyaka – nagyítás"><img src="kepek/galeria/kicsi/uveg-5.jpg" alt="Pezsgősüveg nyaka" loading="lazy" decoding="async"></button></div>
+<div class="gal-also"><p>Palackok, poharak, üvegtáblák és dísztárgyak – fehér aláfestéssel átlátszó felületen is élénk színek.</p><a href="#ajanlat" class="gal-cta" data-felulet="Üveg">Ajánlatot kérek – üveg →</a></div>
+</div>
+<div role="tabpanel" id="panel-muanyag" aria-labelledby="ful-muanyag" class="gal-panel" hidden>
+<div class="galeria"><button type="button" class="gal-kep" data-nagy="kepek/galeria/muanyag-1.jpg" aria-label="Mintás telefontok – nagyítás"><img src="kepek/galeria/kicsi/muanyag-1.jpg" alt="Mintás telefontok" loading="lazy" decoding="async"></button><button type="button" class="gal-kep" data-nagy="kepek/galeria/muanyag-2.jpg" aria-label="Egyedi mintás telefontokok – nagyítás"><img src="kepek/galeria/kicsi/muanyag-2.jpg" alt="Egyedi mintás telefontokok" loading="lazy" decoding="async"></button><button type="button" class="gal-kep" data-nagy="kepek/galeria/muanyag-3.jpg" aria-label="Színes szövegkiemelők – nagyítás"><img src="kepek/galeria/kicsi/muanyag-3.jpg" alt="Színes szövegkiemelők" loading="lazy" decoding="async"></button><button type="button" class="gal-kep" data-nagy="kepek/galeria/muanyag-4.jpg" aria-label="Kulacs a tenger előtt – nagyítás"><img src="kepek/galeria/kicsi/muanyag-4.jpg" alt="Kulacs a tenger előtt" loading="lazy" decoding="async"></button><button type="button" class="gal-kep" data-nagy="kepek/galeria/muanyag-5.jpg" aria-label="Tablet és toll egy tokban – nagyítás"><img src="kepek/galeria/kicsi/muanyag-5.jpg" alt="Tablet és toll egy tokban" loading="lazy" decoding="async"></button></div>
+<div class="gal-also"><p>Telefontokok, tollak, kártyák, kulacsok és promóciós termékek – egyedi grafikával, kis szériában is.</p><a href="#ajanlat" class="gal-cta" data-felulet="Műanyag">Ajánlatot kérek – műanyag →</a></div>
+</div>
+<p style="margin: 0; font-size: 17px; color: #4a4d5a">Más anyagra nyomtatnál? <a href="#ajanlat" style="font-weight: 700">Kérdezz rá, megnézzük.</a></p>
+</div>
+</section>
+
+<section id="termekek" style="border-top: 1px solid #e3e4ea; background: #ffffff; padding: clamp(56px, 8vw, 104px) 20px; scroll-margin-top: 72px">
+<div style="max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px">
+<h2 style="margin: 0; font-family: 'Archivo', sans-serif; font-weight: 900; font-size: clamp(30px, 3.6vw, 48px); line-height: 1.08; letter-spacing: -0.025em; max-width: 720px">Mit nyomtatunk?</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 20px">
+<div style="flex: 1 1 250px; background: #ffffff; border: 1.5px solid #d3d5de; border-radius: 14px; padding: 28px; display: flex; flex-direction: column; gap: 12px">
+<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#6a2bff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v.01M14 20v.01M20 20v.01M17 17h3"/></svg>
+<h3 style="margin: 0; font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 22px; line-height: 1.2">Cégtáblák és QR-táblák</h3>
+<p style="margin: 0; color: #4a4d5a; font-size: 16px">Irodára, üzletbe, pultra – logóval, nyitvatartással, QR-kóddal.</p>
+<a href="#ajanlat" style="margin-top: auto; font-weight: 700; font-size: 16px; min-height: 44px; display: flex; align-items: center">Ajánlatot kérek erre →</a>
+</div>
+<div style="flex: 1 1 250px; background: #ffffff; border: 1.5px solid #d3d5de; border-radius: 14px; padding: 28px; display: flex; flex-direction: column; gap: 12px">
+<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#6a2bff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>
+<h3 style="margin: 0; font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 22px; line-height: 1.2">Reklámtárgyak</h3>
+<p style="margin: 0; color: #4a4d5a; font-size: 16px">Céges ajándékok és promóciós termékek a saját arculatoddal.</p>
+<a href="#ajanlat" style="margin-top: auto; font-weight: 700; font-size: 16px; min-height: 44px; display: flex; align-items: center">Ajánlatot kérek erre →</a>
+</div>
+<div style="flex: 1 1 250px; background: #ffffff; border: 1.5px solid #d3d5de; border-radius: 14px; padding: 28px; display: flex; flex-direction: column; gap: 12px">
+<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#6a2bff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5"/></svg>
+<h3 style="margin: 0; font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 22px; line-height: 1.2">Egyedi ajándékok</h3>
+<p style="margin: 0; color: #4a4d5a; font-size: 16px">Névvel, fotóval, saját grafikával – akár egyetlen darab is.</p>
+<a href="#ajanlat" style="margin-top: auto; font-weight: 700; font-size: 16px; min-height: 44px; display: flex; align-items: center">Ajánlatot kérek erre →</a>
+</div>
+<div style="flex: 1 1 250px; background: #ffffff; border: 1.5px solid #d3d5de; border-radius: 14px; padding: 28px; display: flex; flex-direction: column; gap: 12px">
+<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#6a2bff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8 12 3 3 8v8l9 5 9-5zM3 8l9 5 9-5M12 13v8"/></svg>
+<h3 style="margin: 0; font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 22px; line-height: 1.2">Dobozok és termékcsomagolások</h3>
+<p style="margin: 0; color: #4a4d5a; font-size: 16px">Márkázott csomagolás, amitől a terméked prémiumabbnak hat.</p>
+<a href="#ajanlat" style="margin-top: auto; font-weight: 700; font-size: 16px; min-height: 44px; display: flex; align-items: center">Ajánlatot kérek erre →</a>
+</div>
+</div>
+</div>
+</section>
+
+<section style="border-top: 1px solid #e3e4ea; background: #ffffff; color: #0b0b12; padding: clamp(56px, 8vw, 104px) 20px">
+<div style="max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px">
+<h2 style="margin: 0; font-family: 'Archivo', sans-serif; font-weight: 900; font-size: clamp(30px, 3.6vw, 48px); line-height: 1.08; letter-spacing: -0.025em; max-width: 720px">Amit a UV technológia tud</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 20px">
+<div style="flex: 1 1 250px; border: 1px solid #d3d5de; border-radius: 14px; padding: 28px; display: flex; flex-direction: column; gap: 10px">
+<span aria-hidden="true" style="width: 28px; height: 28px; border-radius: 50%; background: #ffffff; border: 2px solid #0b0b12; box-sizing: border-box"></span>
+<h3 style="margin: 0; font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 22px">Fehér nyomtatás</h3>
+<p style="margin: 0; color: #4a4d5a; font-size: 16px">Sötét és átlátszó anyagon is látszik a grafika – a fehér is nyomtatott szín.</p>
+</div>
+<div style="flex: 1 1 250px; border: 1px solid #d3d5de; border-radius: 14px; padding: 28px; display: flex; flex-direction: column; gap: 10px">
+<span aria-hidden="true" style="display: flex; gap: 4px"><span style="width: 28px; height: 28px; border-radius: 50%; background: #00b7eb"></span><span style="width: 28px; height: 28px; border-radius: 50%; background: #ec1c8c; margin-left: -12px"></span><span style="width: 28px; height: 28px; border-radius: 50%; background: #ffe14a; margin-left: -12px"></span></span>
+<h3 style="margin: 0; font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 22px">Élénk színek</h3>
+<p style="margin: 0; color: #4a4d5a; font-size: 16px">Telt, kontrasztos színek és éles részletek, fotóminőségben.</p>
+</div>
+<div style="flex: 1 1 250px; border: 1px solid #d3d5de; border-radius: 14px; padding: 28px; display: flex; flex-direction: column; gap: 10px">
+<span aria-hidden="true" style="width: 28px; height: 28px; border-radius: 50%; background: #a98bff; box-shadow: 4px 4px 0 #4a1fd6"></span>
+<h3 style="margin: 0; font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 22px">3D / lakk hatás</h3>
+<p style="margin: 0; color: #4a4d5a; font-size: 16px">Kiemelkedő, tapintható és fényes részletek a nyomaton.</p>
+</div>
+<div style="flex: 1 1 250px; border: 1px solid #d3d5de; border-radius: 14px; padding: 28px; display: flex; flex-direction: column; gap: 10px">
+<span aria-hidden="true" style="display: flex; align-items: flex-end; gap: 4px; height: 28px"><span style="width: 10px; height: 10px; background: #6a2bff"></span><span style="width: 10px; height: 19px; background: #6a2bff"></span><span style="width: 10px; height: 28px; background: #6a2bff"></span></span>
+<h3 style="margin: 0; font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 22px">Kis és nagy széria</h3>
+<p style="margin: 0; color: #4a4d5a; font-size: 16px">Egyedi daraboktól a nagyobb tételekig vállalunk munkát.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="gyik" style="border-top: 1px solid #e3e4ea; background: #ffffff; padding: clamp(56px, 8vw, 104px) 20px; scroll-margin-top: 72px">
+<div style="max-width: 820px; margin: 0 auto; display: flex; flex-direction: column; gap: 32px">
+<h2 style="margin: 0; font-family: 'Archivo', sans-serif; font-weight: 900; font-size: clamp(30px, 3.6vw, 48px); line-height: 1.08; letter-spacing: -0.025em">Gyakori kérdések</h2>
+<div style="display: flex; flex-direction: column">
+<details open style="border-top: 1.5px solid #d3d5de; padding: 6px 0">
+<summary style="font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 20px; min-height: 52px; display: flex; align-items: center; justify-content: space-between; gap: 16px">Egy darabot is vállaltok?<span aria-hidden="true" style="color: #6a2bff; font-size: 26px">+</span></summary>
+<p style="margin: 0 0 16px; color: #4a4d5a">Igen, kis és nagy szériát egyaránt nyomtatunk. [MINIMUM RENDELÉS, HA VAN]</p>
+</details>
+<details style="border-top: 1.5px solid #d3d5de; padding: 6px 0">
+<summary style="font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 20px; min-height: 52px; display: flex; align-items: center; justify-content: space-between; gap: 16px">Mennyi idő alatt készül el?<span aria-hidden="true" style="color: #6a2bff; font-size: 26px">+</span></summary>
+<p style="margin: 0 0 16px; color: #4a4d5a">[ÁTLAGOS GYÁRTÁSI IDŐ]</p>
+</details>
+<details style="border-top: 1.5px solid #d3d5de; padding: 6px 0">
+<summary style="font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 20px; min-height: 52px; display: flex; align-items: center; justify-content: space-between; gap: 16px">Milyen fájlt küldjek?<span aria-hidden="true" style="color: #6a2bff; font-size: 26px">+</span></summary>
+<p style="margin: 0 0 16px; color: #4a4d5a">[ELFOGADOTT FÁJLFORMÁTUMOK] Ha nincs kész grafikád, írd meg az elképzelésed. [GRAFIKAI SEGÍTSÉG: VAN / NINCS]</p>
+</details>
+<details style="border-top: 1.5px solid #d3d5de; border-bottom: 1.5px solid #d3d5de; padding: 6px 0">
+<summary style="font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 20px; min-height: 52px; display: flex; align-items: center; justify-content: space-between; gap: 16px">Mekkora méretig tudtok nyomtatni?<span aria-hidden="true" style="color: #6a2bff; font-size: 26px">+</span></summary>
+<p style="margin: 0 0 16px; color: #4a4d5a">[MAXIMÁLIS NYOMTATÁSI MÉRET ÉS VASTAGSÁG]</p>
+</details>
+</div>
+</div>
+</section>
+
+<section style="border-top: 1px solid #e3e4ea; background: #ffffff; color: #0b0b12; padding: clamp(56px, 8vw, 96px) 20px">
+<div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 28px; align-items: center; justify-content: space-between">
+<div style="flex: 1 1 420px; min-width: 0">
+<h2 style="margin: 0 0 10px; font-family: 'Archivo', sans-serif; font-weight: 900; font-size: clamp(30px, 4vw, 52px); line-height: 1.05; letter-spacing: -0.025em">Van egy ötleted? Nyomtassuk ki.</h2>
+<p style="margin: 0; font-size: 19px">Írd meg, mire van szükséged, és árajánlatot küldünk.</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 14px">
+<a href="#ajanlat" style="background: #6a2bff; color: #ffffff; text-decoration: none; font-weight: 800; font-size: 18px; padding: 0 28px; min-height: 56px; display: flex; align-items: center; border-radius: 10px">Árajánlatot kérek</a>
+<a href="tel:+36203639271" style="color: #0b0b12; text-decoration: none; font-weight: 700; font-size: 18px; padding: 0 24px; min-height: 56px; display: flex; align-items: center; border-radius: 10px; border: 2px solid #0b0b12">Hívj: +36 20 363 9271</a>
+</div>
+</div>
+</section>
+
+<footer class="lablec">
+<div class="lablec-racs">
+<div class="lablec-ceg">
+<a href="index.html" aria-label="UV4YOU – főoldal"><img src="kepek/logo-feher.png" alt="UV4YOU" width="151" height="44"></a>
+<p>Közvetlen UV nyomtatás plexire, fára, fémre, üvegre és műanyagra – egyetlen darabtól a nagy szériáig.</p>
+<a class="lablec-cta" href="index.html#ajanlat">Árajánlatot kérek <span aria-hidden="true">→</span></a>
+</div>
+<nav aria-label="Felületek">
+<h3>Felületek</h3>
+<ul><li><a href="index.html#felulet-plexi">Plexi</a></li><li><a href="index.html#felulet-fa">Fa</a></li><li><a href="index.html#felulet-fem">Fém</a></li><li><a href="index.html#felulet-uveg">Üveg</a></li><li><a href="index.html#felulet-muanyag">Műanyag</a></li></ul>
+</nav>
+<div class="lablec-kapcsolat">
+<h3>Kapcsolat</h3>
+<ul>
+<li><a href="tel:+36203639271"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.8 2z"/></svg>+36 20 363 9271</a></li>
+<li><a href="mailto:info@zeuszgroup.hu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>info@zeuszgroup.hu</a></li>
+<li><span class="cim"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-top: 3px"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>1113 Budapest, Bartók Béla út 79. 2. em. 2. ajtó</span></span></li>
+</ul>
+</div>
+<nav aria-label="Információk">
+<h3>Információk</h3>
+<ul>
+<li><a href="index.html#termekek">Mit nyomtatunk?</a></li>
+<li><a href="index.html#gyik">Gyakori kérdések</a></li>
+<li><a href="adatkezeles.html">Adatkezelési tájékoztató</a></li>
+<li><a href="sutik.html">Sütik (cookie-k)</a></li>
+<li><button type="button" data-suti-beallitasok>Sütibeállítások</button></li>
+<li><a href="impresszum.html">Impresszum</a></li>
+</ul>
+</nav>
+</div>
+<div class="lablec-also">
+<span>© 2026 Zeusz Group Kft. – UV4YOU. Minden jog fenntartva.</span>
+<span>Cégjegyzékszám: 01-09-455504 · Adószám: 33033026-2-43</span>
+</div>
+</footer>
+
+</div>
+<script>
+// Preloader: a logó a képernyő közepén jelenik meg, majd betöltés után a helyére repül a fejlécben.
+(function () {
+  var html = document.documentElement;
+  var pre = document.getElementById('preloader');
+  var logo = document.getElementById('preloader-logo');
+  var cel = document.getElementById('fejlec-logo');
+  var start = performance.now();
+  var MIN_IDO = 700, MAX_IDO = 3000, kesz = false;
+  var lassit = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function vege() {
+    html.classList.remove('preloader-aktiv');
+    pre.remove();
+  }
+
+  function indul() {
+    if (kesz) return;
+    kesz = true;
+    var varj = Math.max(0, MIN_IDO - (performance.now() - start));
+    setTimeout(function () {
+      var a = logo.getBoundingClientRect();
+      var b = cel.getBoundingClientRect();
+      if (lassit || !b.width) {
+        pre.style.transition = 'opacity .3s';
+        pre.style.opacity = '0';
+        setTimeout(vege, 300);
+        return;
+      }
+      var s = b.width / a.width;
+      logo.style.animation = 'none';
+      logo.style.transition = 'transform .75s cubic-bezier(.65,0,.25,1)';
+      pre.classList.add('indul');
+      requestAnimationFrame(function () {
+        logo.style.transform = 'translate(' + (b.left - a.left) + 'px,' + (b.top - a.top) + 'px) scale(' + s + ')';
+      });
+      logo.addEventListener('transitionend', vege, { once: true });
+      setTimeout(vege, 1200); // biztonsági tartalék
+    }, varj);
+  }
+
+  if (document.readyState === 'complete') indul();
+  else window.addEventListener('load', indul);
+  setTimeout(indul, MAX_IDO);
+})();
+</script>
+<div id="nagyito" role="dialog" aria-modal="true" aria-label="Kép nagyítva" hidden>
+<button type="button" class="nagyito-gomb" id="nagyito-bezar" aria-label="Bezárás">×</button>
+<button type="button" class="nagyito-gomb" id="nagyito-elozo" aria-label="Előző kép">‹</button>
+<img id="nagyito-kep" alt="">
+<p id="nagyito-felirat"></p>
+<button type="button" class="nagyito-gomb" id="nagyito-kovetkezo" aria-label="Következő kép">›</button>
+</div>
+<script>
+// Felület-galéria: fülek, nagyító és "Ajánlatot kérek" a kiválasztott felülettel.
+(function () {
+  var fulek = Array.prototype.slice.call(document.querySelectorAll('.gal-ful'));
+
+  function valt(ful, fokusz) {
+    fulek.forEach(function (f) {
+      var aktiv = f === ful;
+      f.setAttribute('aria-selected', aktiv ? 'true' : 'false');
+      f.tabIndex = aktiv ? 0 : -1;
+      document.getElementById(f.getAttribute('aria-controls')).hidden = !aktiv;
+    });
+    if (fokusz) ful.focus();
+  }
+
+  // A lábléc linkjei (#felulet-fa stb.) a megfelelő fülre visznek
+  function cimbol() {
+    var m = location.hash.match(/^#felulet-(\w+)$/);
+    var ful = m && document.getElementById('ful-' + m[1]);
+    if (!ful) return;
+    valt(ful);
+    document.getElementById('feluletek').scrollIntoView();
+  }
+  window.addEventListener('hashchange', cimbol);
+  window.addEventListener('load', function () { setTimeout(cimbol, 0); });
+
+  fulek.forEach(function (f, i) {
+    f.addEventListener('click', function () { valt(f); });
+    f.addEventListener('keydown', function (e) {
+      var j = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: fulek.length - 1 }[e.key];
+      if (j === undefined) return;
+      e.preventDefault();
+      valt(fulek[(j + fulek.length) % fulek.length], true);
+    });
+  });
+
+  // "Ajánlatot kérek" – előre kiválasztja a felületet az űrlapon
+  document.querySelectorAll('.gal-cta').forEach(function (a) {
+    a.addEventListener('click', function () {
+      var sel = document.getElementById('f-felulet');
+      if (sel) sel.value = a.getAttribute('data-felulet');
+    });
+  });
+
+  // Nagyító
+  var doboz = document.getElementById('nagyito');
+  var kep = document.getElementById('nagyito-kep');
+  var felirat = document.getElementById('nagyito-felirat');
+  var lista = [], hol = 0, elozoFokusz = null;
+
+  function mutat(i) {
+    hol = (i + lista.length) % lista.length;
+    var g = lista[hol], alt = g.querySelector('img').alt;
+    kep.src = g.getAttribute('data-nagy');
+    kep.alt = alt;
+    felirat.textContent = alt + ' (' + (hol + 1) + '/' + lista.length + ')';
+  }
+
+  function nyit(gomb) {
+    lista = Array.prototype.slice.call(gomb.parentNode.querySelectorAll('.gal-kep'));
+    elozoFokusz = gomb;
+    mutat(lista.indexOf(gomb));
+    doboz.hidden = false;
+    document.body.style.overflow = 'hidden';
+    document.getElementById('nagyito-bezar').focus();
+  }
+
+  function zar() {
+    doboz.hidden = true;
+    document.body.style.overflow = '';
+    kep.removeAttribute('src');
+    if (elozoFokusz) elozoFokusz.focus();
+  }
+
+  document.querySelectorAll('.gal-kep').forEach(function (g) {
+    g.addEventListener('click', function () { nyit(g); });
+  });
+  document.getElementById('nagyito-bezar').addEventListener('click', zar);
+  document.getElementById('nagyito-elozo').addEventListener('click', function () { mutat(hol - 1); });
+  document.getElementById('nagyito-kovetkezo').addEventListener('click', function () { mutat(hol + 1); });
+  doboz.addEventListener('click', function (e) { if (e.target === doboz) zar(); });
+  doboz.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') zar();
+    else if (e.key === 'ArrowLeft') mutat(hol - 1);
+    else if (e.key === 'ArrowRight') mutat(hol + 1);
+    else if (e.key === 'Tab') {
+      var g = doboz.querySelectorAll('button'), elso = g[0], utolso = g[g.length - 1];
+      if (e.shiftKey && document.activeElement === elso) { e.preventDefault(); utolso.focus(); }
+      else if (!e.shiftKey && document.activeElement === utolso) { e.preventDefault(); elso.focus(); }
+    }
+  });
+
+  // Mobilon húzással is lehet lapozni
+  var x0 = null;
+  doboz.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+  doboz.addEventListener('touchend', function (e) {
+    if (x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0;
+    if (Math.abs(dx) > 50) mutat(hol + (dx < 0 ? 1 : -1));
+    x0 = null;
+  });
+})();
+</script>
+<script src="suti.js" defer></script>
+</body>
+</html>
