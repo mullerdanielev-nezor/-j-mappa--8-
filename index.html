@@ -51,13 +51,15 @@ input:focus,select:focus,textarea:focus,a:focus-visible,summary:focus-visible{ou
 .gal-also p{margin:0;color:#33354a;font-size:18px;max-width:640px;flex:1 1 320px}
 .gal-cta{background:#6a2bff;color:#ffffff !important;text-decoration:none;font-weight:800;font-size:16px;padding:0 22px;min-height:48px;display:flex;align-items:center;border-radius:10px}
 .gal-cta:hover{background:#4a1fd6}
-.galeria[data-db="3"]{grid-template-columns:2fr 1fr;aspect-ratio:3/2}
+.galeria[data-db="3"]{grid-template-columns:repeat(3,1fr);grid-template-rows:none;aspect-ratio:auto;max-width:840px;width:100%;margin:0 auto}
+.galeria[data-db="3"] .gal-kep{aspect-ratio:1}
+.galeria[data-db="3"] .gal-kep:first-child{grid-row:auto}
 .galeria[data-db="2"]{grid-template-columns:1fr 1fr;grid-template-rows:none;aspect-ratio:2/1}
 .galeria[data-db="2"] .gal-kep:first-child{grid-row:auto}
 .galeria[data-db="1"]{grid-template-columns:1fr;grid-template-rows:none;aspect-ratio:auto}
 .galeria .gal-kep{background:#ffffff;border:1.5px solid #e3e4ea}
 .galeria .gal-kep img{object-fit:contain}
-@media (max-width:760px){.galeria[data-db]{grid-template-columns:1fr 1fr;grid-template-rows:none;aspect-ratio:auto}.galeria[data-db] .gal-kep{aspect-ratio:1}.galeria[data-db="3"] .gal-kep:first-child{grid-column:span 2;grid-row:auto;aspect-ratio:1}}
+@media (max-width:760px){.galeria[data-db]{grid-template-columns:1fr 1fr;grid-template-rows:none;aspect-ratio:auto}.galeria[data-db] .gal-kep{aspect-ratio:1}.galeria[data-db="3"]{grid-template-columns:repeat(3,1fr);gap:8px}.galeria[data-db="3"] .gal-kep:first-child{grid-column:auto}}
 @keyframes gal-be{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 @media (max-width:760px){.galeria{grid-template-columns:1fr 1fr;grid-template-rows:none;aspect-ratio:auto}.gal-kep{aspect-ratio:1}.gal-kep:first-child{grid-row:auto;grid-column:span 2;aspect-ratio:4/3}}
 #nagyito{position:fixed;inset:0;z-index:96;background:rgba(11,11,18,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:56px 16px 24px;gap:14px}
